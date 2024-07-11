@@ -8,6 +8,7 @@
     "@testing-library/react-native": "^12.5.1",
     "axios": "^1.7.2",
     "expo": "^51.0.0",
+    "expo-dev-client": "~4.0.20",
     "jest": "^29.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -26,7 +27,7 @@
     "@types/react-native": "~0.70.6",
     "typescript": "~5.3.3"
   },
-  "name": "app",
+  "name": "jano",
   "version": "1.0.0",
   "private": true,
   "scripts": {
