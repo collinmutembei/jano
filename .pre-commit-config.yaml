@@ -1,4 +1,4 @@
-exclude: ^backend/migrations/
+exclude: '(migrations|app)/.*'
 default_stages: [commit, push]
 repos:
   - repo: https://github.com/asottile/blacken-docs
