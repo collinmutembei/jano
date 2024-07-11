@@ -66,6 +66,7 @@ jobs:
           on-master: latest
           latest-on-tag: true
           restrict-to: collinmutembei/jano
+          context: backend
           registries: |
             ghcr.io
           credentials: |
