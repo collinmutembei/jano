@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         run: cd backend && poetry install
       - name: Run tests
-        run: cd backend && poetry run pytest
+        run: cd backend && poetry run pytest -vv
 
   package:
     runs-on: ubuntu-latest
