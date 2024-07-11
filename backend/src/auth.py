@@ -1,14 +1,15 @@
-from passlib.context import CryptContext
-import jwt
-from datetime import datetime, timedelta, UTC
+from datetime import UTC, datetime, timedelta
 from typing import Optional
+
+import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
+from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from src.models import User as UserModel
-from src.database import get_db
-from src.schemas import User
 from src.config import settings
+from src.database import get_db
+from src.models import User as UserModel
+from src.schemas import User
 
 SECRET_KEY = settings.secret_key
 ALGORITHM = "HS256"

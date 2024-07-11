@@ -1,11 +1,12 @@
-from typing import List
 from datetime import date
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import JournalEntry, JournalEntryCreate, JournalEntryUpdate, User
-from src.models import JournalEntry as JournalEntryModel
-from src.database import get_db
 from src.auth import get_current_user
+from src.database import get_db
+from src.models import JournalEntry as JournalEntryModel
+from src.schemas import JournalEntry, JournalEntryCreate, JournalEntryUpdate, User
 
 router = APIRouter()
 
@@ -25,8 +26,8 @@ def create_journal_entry(
 
 @router.get("/", response_model=List[JournalEntry])
 def get_journal_entries(
-    start: date = None,
-    end: date = None,
+    start: date = None,  # type: ignore[assignment]
+    end: date = None,  # type: ignore[assignment]
     db: Session = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
