@@ -1,0 +1,76 @@
+name: Backend CI/CD
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+
+env:
+  DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
+  SECRET_KEY: da5732fc7e2fef8494e07fa7220da78bbc4f0e1129e7b1962db2eb791be1633c
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - uses: pre-commit/action@v3.0.0
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [check]
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.8.3
+      - name: Install dependencies
+        run: poetry install
+      - name: Run tests
+        run: cd backend && poetry run pytest
+
+  package:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build and publish app
+        uses: openzim/docker-publish-action@v10
+        with:
+          image-name: collinmutembei/jano
+          on-master: latest
+          latest-on-tag: true
+          restrict-to: collinmutembei/jano
+          registries: |
+            ghcr.io
+          credentials: |
+            GHCRIO_USERNAME=${{ github.repository_owner }}
+            GHCRIO_TOKEN=${{ secrets.CR_PAT }}
+          build-args: |
+            PROJECT_VERSION=1.0.0
+            COMMIT_ID=${{ github.sha }}
