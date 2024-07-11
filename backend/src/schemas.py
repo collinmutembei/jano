@@ -1,5 +1,6 @@
+from datetime import UTC, datetime
+
 from pydantic import BaseModel
-from datetime import datetime, UTC
 
 
 class UserBase(BaseModel):
@@ -31,10 +32,10 @@ class JournalEntryCreate(JournalEntryBase):
 
 
 class JournalEntryUpdate(JournalEntryBase):
-    title: str = None
-    content: str = None
-    category: str = None
-    date: datetime = None
+    title: str = None  # type: ignore[assignment]
+    content: str = None  # type: ignore[assignment]
+    category: str = None  # type: ignore[assignment]
+    date: datetime = None  # type: ignore[assignment]
 
 
 class JournalEntry(JournalEntryBase):
