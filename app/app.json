@@ -1,19 +1,16 @@
 {
   "name": "jano",
-  "slug": "jano",
   "splash": {
-    "backgroundColor": "#25292e"
+    "backgroundColor": "#009688"
   },
-  "expo": {
-    "extra": {
-      "eas": {
-        "projectId": "d1bf8f00-3ae2-40b7-95ea-1299a68e625a"
-      }
-    },
-    "owner": "solublecode",
-    "slug": "jano",
-    "android": {
-      "package": "com.solublecode.jano"
+  "extra": {
+    "eas": {
+      "projectId": "d1bf8f00-3ae2-40b7-95ea-1299a68e625a"
     }
+  },
+  "owner": "solublecode",
+  "slug": "jano",
+  "android": {
+    "package": "com.solublecode.jano"
   }
 }

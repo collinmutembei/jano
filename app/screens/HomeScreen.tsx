@@ -17,7 +17,7 @@ const HomeScreen = () => {
   }, [dispatch]);
 
   const renderItem = ({ item }: any) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.journalItem}
       onPress={() => navigation.navigate('JournalDetail', { journal: item })}
     >
