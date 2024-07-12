@@ -4,4 +4,3 @@ export interface Journal {
     content: string;
     category: string;
   }
-  
